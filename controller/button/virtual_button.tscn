@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://te02btfkpvlg"]
+
+[ext_resource type="Script" path="res://controller/button/virtual_button.gd" id="1_006j2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rr8el"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.105882, 0.105882, 0.105882, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_color = Color(0, 0, 0, 0.25098)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfi6l"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.105882, 0.105882, 0.105882, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_51dge"]
+
+[node name="virtual_button" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_rr8el")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rr8el")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rfi6l")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_51dge")
+action_mode = 0
+text = "A"
+script = ExtResource("1_006j2")

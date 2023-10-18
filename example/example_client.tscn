@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://c4gvu5j15nc3a"]
+
+[ext_resource type="PackedScene" uid="uid://cm2ntk0fdw6nh" path="res://example/example_client_character.tscn" id="1_2mljv"]
+[ext_resource type="Script" path="res://example/example_client.gd" id="1_c4y45"]
+[ext_resource type="Script" path="res://mobile_controller_server.gd" id="2_b5ii2"]
+[ext_resource type="Script" path="res://mobile_controller_physical_mapping.gd" id="5_7nq75"]
+[ext_resource type="PackedScene" uid="uid://ctg4v5im8r467" path="res://controller/virtual_controller.tscn" id="5_iiyis"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k5r6y"]
+friction = 0.5
+bounce = 0.75
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fv4fg"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vbcah"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2a3om"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_161x0"]
+
+[sub_resource type="Resource" id="Resource_ki42q"]
+script = ExtResource("5_7nq75")
+stick_side = 0
+button_indices = Array[int]([0, 1, 2, 3])
+
+[node name="example_client" type="Node2D"]
+script = ExtResource("1_c4y45")
+player_scene = ExtResource("1_2mljv")
+
+[node name="background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="color" type="ColorRect" parent="background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0823529, 0.0823529, 0.2, 1)
+
+[node name="boundary" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_k5r6y")
+
+[node name="left" type="CollisionShape2D" parent="boundary"]
+shape = SubResource("WorldBoundaryShape2D_fv4fg")
+
+[node name="top" type="CollisionShape2D" parent="boundary"]
+shape = SubResource("WorldBoundaryShape2D_vbcah")
+
+[node name="right" type="CollisionShape2D" parent="boundary"]
+position = Vector2(1152, 0)
+shape = SubResource("WorldBoundaryShape2D_2a3om")
+
+[node name="bottom" type="CollisionShape2D" parent="boundary"]
+position = Vector2(0, 648)
+shape = SubResource("WorldBoundaryShape2D_161x0")
+
+[node name="players" type="Node2D" parent="."]
+
+[node name="controller" type="CanvasLayer" parent="."]
+
+[node name="virtual_controller_1" parent="controller" instance=ExtResource("5_iiyis")]
+modulate = Color(1, 1, 1, 0.501961)
+anchors_preset = 10
+anchor_bottom = 0.0
+grow_vertical = 1
+
+[node name="virtual_controller_2" parent="controller" instance=ExtResource("5_iiyis")]
+modulate = Color(1, 1, 1, 0.501961)
+anchors_preset = 12
+anchor_top = 1.0
+grow_vertical = 0
+
+[node name="mobile_controller" type="Node" parent="."]
+script = ExtResource("2_b5ii2")
+input_mapping = SubResource("Resource_ki42q")
+accept_new_clients = true

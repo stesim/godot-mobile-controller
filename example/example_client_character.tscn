@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm2ntk0fdw6nh"]
+
+[ext_resource type="Script" path="res://example/example_client_character.gd" id="1_b2djh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_07yqt"]
+
+[sub_resource type="Curve" id="Curve_6o75y"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[node name="example_client_character" type="RigidBody2D"]
+script = ExtResource("1_b2djh")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_07yqt")
+
+[node name="pivot" type="Node2D" parent="."]
+show_behind_parent = true
+
+[node name="direction_indicator" type="Line2D" parent="pivot"]
+points = PackedVector2Array(0, 0, 32, 0)
+width = 2.0
+default_color = Color(1, 1, 1, 0.501961)
+
+[node name="strength_indicator" type="Line2D" parent="pivot"]
+visible = false
+points = PackedVector2Array(0, 0, 192, 0)
+width = 16.0
+width_curve = SubResource("Curve_6o75y")
